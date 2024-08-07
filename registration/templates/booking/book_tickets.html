@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-<header>
-    <p>Book Your Tickets</p>
+<head>
+    <title>Book Tickets</title>
     <script>
         function generateGuestFields() {
             const numTickets = document.getElementById('id_num_tickets').value;
@@ -29,16 +28,16 @@
             }
         }
     </script>
-</header>
+</head>
 <body>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-
-        <label for="id_num_tickets">Number of Guests</label>
+        <label for="id_num_tickets">Number of Guests (count yourself!)</label>
         <input type="number" id="id_num_tickets" name="num_tickets" onchange="generateGuestFields()">
 
         <div id="guest-fields-container"></div>
+
+        {{ form.as_p }}
 
         <button type="submit">Submit</button>
     </form>
@@ -51,58 +50,4 @@
         </div>
     {% endif %}
 </body>
-
-
-<style>
-    
-    header {
-        background: white;
-        color: black;
-    }
-
-    html, body {
-        height: 100%;
-        width: 100%;
-      }
-
-
-
-    body {
-        height: 100%;
-        background: linear-gradient(90deg, rgba(12,14,61,1) 0%, rgba(55,33,133,1) 46%, rgba(104,74,134,1) 100%);
-    }
-
-
-    title {
-        text-align: center;
-        font-family: serif;
-        font-size: 30px;
-    }
-
-    p {
-        text-align: left;
-        font-family: monospace;
-        font-size: 20px;
-        color: #ddc1b9;
-        
-    }
-
-    button {
-        background-color: #1f50a7;
-        border-radius: 6px;
-        border: none;
-        color: #ddc1b9;
-        padding: 12px 25px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 4px;
-        cursor: pointer;
-        text-family: monospace;
-    }
-
-</style>
-
-
 </html>
