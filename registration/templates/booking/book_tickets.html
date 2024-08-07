@@ -5,7 +5,7 @@
     <script>
         function generateGuestFields() {
             const numTickets = document.getElementById('id_num_tickets').value;
-            const numGuests = numTickets - 1;
+            const numGuests = numTickets;
             const guestFieldsContainer = document.getElementById('guest-fields-container');
             guestFieldsContainer.innerHTML = '';
 
@@ -32,7 +32,7 @@
 <body>
     <form method="post">
         {% csrf_token %}
-        <label for="id_num_tickets">Number of Guests (count yourself!)</label>
+        <label for="id_num_tickets">Number of Guests (exclude yourself!)</label>
         <input type="number" id="id_num_tickets" name="num_tickets" onchange="generateGuestFields()">
 
         <div id="guest-fields-container"></div>
