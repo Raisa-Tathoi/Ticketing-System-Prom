@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Tickets</title>
+    <script>
+        function generateGuestFields() {
+            const numTickets = document.getElementById('id_num_tickets').value;
+            const numGuests = numTickets - 1;
+            const guestFieldsContainer = document.getElementById('guest-fields-container');
+            guestFieldsContainer.innerHTML = '';
+
+            for (let i = 1; i <= numGuests; i++) {
+                const nameField = document.createElement('input');
+                nameField.type = 'text';
+                nameField.name = `guest_name_${i}`;
+                nameField.placeholder = `Guest ${i} Name`;
+
+                const emailField = document.createElement('input');
+                emailField.type = 'email';
+                emailField.name = `guest_email_${i}`;
+                emailField.placeholder = `Guest ${i} Email`;
+                emailField.pattern = '^[a-zA-Z0-9._%+-]+@educbe.ca$';
+                emailField.title = 'Please enter a valid CBE email address ending with @educbe.ca.';
+
+                guestFieldsContainer.appendChild(nameField);
+                guestFieldsContainer.appendChild(emailField);
+                guestFieldsContainer.appendChild(document.createElement('br'));
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_num_tickets">Number of Guests (count yourself!)</label>
+        <input type="number" id="id_num_tickets" name="num_tickets" onchange="generateGuestFields()">
+
+        <div id="guest-fields-container"></div>
+
+        {{ form.as_p }}
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if form.non_field_errors %}
+        <div class="errors">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
