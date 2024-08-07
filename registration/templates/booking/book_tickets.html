@@ -2,7 +2,7 @@
 <html>
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <header>
-    <p>Book Your Tickets</p>
+    <h1>Book Your Tickets</h1>
     <script>
         function generateGuestFields() {
             const numTickets = document.getElementById('id_num_tickets').value;
@@ -57,14 +57,8 @@
     
     header {
         background: white;
-        color: black;
+    
     }
-
-    html, body {
-        height: 100%;
-        width: 100%;
-      }
-
 
 
     body {
@@ -73,18 +67,34 @@
     }
 
 
-    title {
+    h1 {
         text-align: center;
-        font-family: serif;
+        font-family: 'Roboto', sans-serif;
         font-size: 30px;
+        color: black;
+        font-weight: 1200;
+        padding: 10px;
+    
+    }
+
+    label {
+        text-align: left;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
+        padding-left: 20px;
+        padding: 7px;
     }
 
     p {
         text-align: left;
-        font-family: monospace;
+        font-family: 'Roboto', sans-serif;
         font-size: 20px;
-        color: #ddc1b9;
-        
+        color: white;
+        font-weight: bold; 
+        padding-left: 20px;   
+        padding: 7px;
     }
 
     button {
@@ -92,14 +102,14 @@
         border-radius: 6px;
         border: none;
         color: #ddc1b9;
-        padding: 12px 25px;
+        padding: 20px 25px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 20px;
         margin: 4px;
         cursor: pointer;
-        text-family: monospace;
+        font-family: 'Roboto', sans-serif;
     }
 
 </style>
