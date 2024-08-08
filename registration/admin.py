@@ -7,7 +7,7 @@ class GuestInline(admin.TabularInline):
     readonly_fields = ('name', 'email')
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone_number', 'school_email', 'num_tickets', 'alert_phone_number', 'pending_final')
+    list_display = ('name', 'phone_number', 'school_email', 'number_of_tickets', 'alert_phone_number', 'pending_final')
     inlines = [GuestInline]
 
 admin.site.register(Booking, BookingAdmin)

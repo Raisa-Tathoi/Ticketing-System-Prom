@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('phone_number', models.CharField(max_length=15)),
                 ('school_email', models.EmailField(max_length=254)),
-                ('num_tickets', models.PositiveIntegerField()),
+                ('number_of_tickets', models.PositiveIntegerField()),
                 ('alert_phone_number', models.CharField(max_length=15)),
                 ('pending_final', models.FloatField(default=0, editable=False)),
             ],
