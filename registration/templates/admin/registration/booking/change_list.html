@@ -1,24 +1,31 @@
-{% extends "admin/change_list.html" %}
+{% extends 'admin/change_list.html' %}
+{% load i18n %}
 
 {% block result_list %}
-    <table class="model-list-table">
-        <thead>
+<table class="admin-list-table">
+    <thead>
+        <tr>
+            <th>Booking Details</th>
+            <th>Guests</th>
+            <th>Pending Final</th>
+            <th>Is Pending Final Checked</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in cl.result_list %}
             <tr>
-                <th>Booking Details</th>
-                <th>Guests</th>
-                <th>Alert Phone Number</th>
-                <th>Pending Final</th>
+                <td>{{ booking.name }} - {{ booking.school_email }}</td>
+                <td>
+                    {% for guest in booking.guests.all %}
+                        {{ guest.name }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ booking.pending_final }}</td>
+                <td>
+                    <input type="checkbox" {% if booking.is_pending_final_checked %}checked{% endif %} disabled>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            {% for obj in cl.result_list %}
-                <tr>
-                    <td>{{ obj.booking_details }}</td>
-                    <td>{{ obj.guests }}</td>
-                    <td>{{ obj.alert_phone_number }}</td>
-                    <td>{{ obj.pending_final }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

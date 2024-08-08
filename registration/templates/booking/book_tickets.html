@@ -38,11 +38,10 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
 
 <section class="guest_fields">
 
-        <label for="id_number_of_tickets">Number of Guests:</label>
+        <label for="id_number_of_tickets">Number of Guests (exclude yourself!):</label>
         <input type="number" id="id_number_of_tickets" name="number_of_tickets" onchange="generateGuestFields()">
 
 </section>
@@ -50,7 +49,7 @@
         <div id="guest-fields-container"></div>
         <br><br>
 
-
+        {{ form.as_p }}
 <section class="submit_button">
 
         <button type="submit">Submit</button>
@@ -147,7 +146,7 @@
         border-radius: 6px;
         border: none;
         color: black;
-        padding: 15px 25px;
+        padding: 14px 25px;
         text-align: center;
         text-decoration: none;
         display: inline-block;

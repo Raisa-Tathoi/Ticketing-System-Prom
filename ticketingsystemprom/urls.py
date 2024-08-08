@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('book/', views.book_tickets, name='book_tickets'),
     path('success/', views.success, name='success'),
+    path('booking/<int:booking_id>/', views.qr_code_scan, name='qr_code_redirect'),
 ]
