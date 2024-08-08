@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Book Tickets</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<header>
+    <h1>Book Your Tickets</h1>
     <script>
         function generateGuestFields() {
-            const numTickets = document.getElementById('id_num_tickets').value;
-            const numGuests = numTickets;
+            const numTickets = document.getElementById('id_number_of_tickets').value;
+            const numGuests = numTickets - 1;
             const guestFieldsContainer = document.getElementById('guest-fields-container');
             guestFieldsContainer.innerHTML = '';
 
@@ -28,19 +29,35 @@
             }
         }
     </script>
-</head>
+</header>
+
+<section class="transparent-section">
 <body>
+    
+
+
     <form method="post">
         {% csrf_token %}
-        <label for="id_num_tickets">Number of Guests (exclude yourself!)</label>
-        <input type="number" id="id_num_tickets" name="num_tickets" onchange="generateGuestFields()">
-
-        <div id="guest-fields-container"></div>
-
         {{ form.as_p }}
+
+<section class="guest_fields">
+
+        <label for="id_number_of_tickets">Number of Guests:</label>
+        <input type="number" id="id_number_of_tickets" name="number_of_tickets" onchange="generateGuestFields()">
+
+</section>
+ 
+        <div id="guest-fields-container"></div>
+        <br><br>
+
+
+<section class="submit_button">
 
         <button type="submit">Submit</button>
     </form>
+
+</section>
+
 
     {% if form.non_field_errors %}
         <div class="errors">
@@ -49,5 +66,118 @@
             {% endfor %}
         </div>
     {% endif %}
+
+
+
 </body>
+
+</section>
+
+<style>
+    
+    .transparent-section {
+        background-color: rgba(255, 255, 255, 0.3); /* White background with 0.3 transparency */
+        padding-left: 50px;
+        padding-top: 27px;
+        padding-right: 50px;
+        padding-bottom: 50px;
+        margin: 100px;
+    }
+    
+    .transparent-section p, body {
+        color: rgba(0, 0, 0, 1); /* Fully opaque text */
+    }
+
+    .guest_fields {
+        padding-left: 30px;
+    }
+
+    .submit_button {
+        padding-left: 55px;
+
+    }
+
+    header {
+        background: white;
+    
+    }
+
+    body {
+        height: 100%;
+        background: linear-gradient(90deg, rgba(12,14,61,1) 0%, rgba(55,33,133,1) 46%, rgba(104,74,134,1) 100%);
+        opacity: 1;
+    }
+
+
+    h1 {
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        color: black;
+        font-weight: 1200;
+        padding: 10px;
+    
+    }
+
+    label {
+        text-align: left;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
+        padding-left: 30px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    p {
+        text-align: left;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        color: white;
+        font-weight: bold; 
+        padding-left: 30px;   
+        padding-top: 7px;
+        padding-bottom: 7px;
+        opacity: 1;
+    }
+
+    button {
+        background-color: white;
+        border-radius: 6px;
+        border: none;
+        color: black;
+        padding: 15px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px;
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
+
+    input {
+        border: 2px solid white;
+        padding: 6px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    input[type=text] {
+        width: 15%;
+        
+    }
+
+    input[type=email] {
+        width: 15%;
+        
+    }
+
+</style>
+
+
 </html>

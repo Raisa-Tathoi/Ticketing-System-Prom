@@ -8,9 +8,9 @@ def book_tickets(request):
         if form.is_valid():
             booking = form.save()
 
-            num_tickets = form.cleaned_data.get('num_tickets')
+            number_of_tickets = form.cleaned_data.get('number_of_tickets')
 
-            for i in range(1, num_tickets):
+            for i in range(1, number_of_tickets):
                 guest_name = request.POST.get(f'guest_name_{i}')
                 guest_email = request.POST.get(f'guest_email_{i}')
                 if guest_name and guest_email:
