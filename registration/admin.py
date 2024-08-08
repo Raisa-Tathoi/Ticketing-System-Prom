@@ -2,11 +2,19 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import Booking, Guest
 
+class GuestInline(admin.TabularInline):
+    model = Guest
+    extra = 1
+
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('booking_details', 'guests', 'alert_phone_number', 'pending_final')
+    list_display = ('booking_details', 'guests', 'pending_final', 'is_pending_final_checked')
+    inlines = [GuestInline]
+    list_filter = ('is_pending_final_checked',)
+    list_editable = ('is_pending_final_checked',)
 
     def booking_details(self, obj):
-        return format_html('<strong>{}</strong><br>{}', obj.name, obj.school_email)
+        return f"{obj.name} - {obj.school_email}"
+    booking_details.short_description = 'Booking Details'
 
     def guests(self, obj):
         guests = obj.guests.all()
@@ -14,9 +22,6 @@ class BookingAdmin(admin.ModelAdmin):
             [f"{guest.name} ({guest.email})" for guest in guests]
         )
         return format_html(guest_details)
-
-    booking_details.short_description = 'Booking Details'
     guests.short_description = 'Guests'
 
 admin.site.register(Booking, BookingAdmin)
-admin.site.register(Guest)

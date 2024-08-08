@@ -1,4 +1,7 @@
 from django.db import models
+import qrcode
+from io import BytesIO
+from django.core.files import File
 
 class Booking(models.Model):
     name = models.CharField(max_length=100)
@@ -7,13 +10,26 @@ class Booking(models.Model):
     number_of_tickets = models.PositiveIntegerField()
     alert_phone_number = models.CharField(max_length=15)
     pending_final = models.FloatField(editable=False, default=0)
+    qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)
+    is_pending_final_checked = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
+        if not self.qr_code:
+            qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+            qr.add_data(f'http://yourdomain.com/booking/{self.id}')
+            qr.make(fit=True)
+            img = qr.make_image(fill='black', back_color='white')
+            buffer = BytesIO()
+            img.save(buffer, format='PNG')
+            file_name = f'qr_code_{self.id}.png'
+            self.qr_code.save(file_name, File(buffer), save=False)
+
         if self.number_of_tickets % 2 == 0:
             pending = self.number_of_tickets * 5
         else:
             pending = self.number_of_tickets * 7
         self.pending_final = pending
+
         super().save(*args, **kwargs)
 
     def __str__(self):
