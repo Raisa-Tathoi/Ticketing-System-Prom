@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i*lrxg3bp_w$wb2@k&f0dyj&ml58hh%ngbm96--ofk&51g4___
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://ticketing-system-prom.onrender.com/']
+ALLOWED_HOSTS = ['ticketing-system-prom.onrender.com']
 
 
 # Application definition
