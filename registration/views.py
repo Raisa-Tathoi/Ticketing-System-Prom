@@ -51,8 +51,8 @@ def success(request):
 def qr_code_scan(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
 
-    if booking.is_pending_final_checked:
+    if booking.paid:
         guests = booking.guests.all()
         return render(request, 'booking_details.html', {'booking': booking, 'guests': guests})
     else:
-        return render(request, 'pending_final.html', {'pending_final': booking.pending_final})
+        return render(request, 'payment_due.html', {'payment_due': booking.payment_due})

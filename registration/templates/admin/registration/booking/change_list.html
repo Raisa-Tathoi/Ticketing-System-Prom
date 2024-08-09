@@ -7,8 +7,8 @@
         <tr>
             <th>Booking Details</th>
             <th>Guests</th>
-            <th>Pending Final</th>
-            <th>Is Pending Final Checked</th>
+            <th>Payment Due</th>
+            <th>Paid</th>
         </tr>
     </thead>
     <tbody>
@@ -20,9 +20,9 @@
                         {{ guest.name }}<br>
                     {% endfor %}
                 </td>
-                <td>{{ booking.pending_final }}</td>
+                <td>{{ booking.payment_due }}</td>
                 <td>
-                    <input type="checkbox" {% if booking.is_pending_final_checked %}checked{% endif %} disabled>
+                    <input type="checkbox" {% if booking.paid %}checked{% endif %}>
                 </td>
             </tr>
         {% endfor %}

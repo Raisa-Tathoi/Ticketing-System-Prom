@@ -7,10 +7,10 @@ class GuestInline(admin.TabularInline):
     extra = 1
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('booking_details', 'guests', 'pending_final', 'is_pending_final_checked')
+    list_display = ('booking_details', 'guests', 'payment_due', 'paid')
     inlines = [GuestInline]
-    list_filter = ('is_pending_final_checked',)
-    list_editable = ('is_pending_final_checked',)
+    list_filter = ('paid',)
+    list_editable = ('paid',)
 
     def booking_details(self, obj):
         return f"{obj.name} - {obj.school_email}"

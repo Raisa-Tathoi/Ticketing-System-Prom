@@ -9,9 +9,9 @@ class Booking(models.Model):
     school_email = models.EmailField()
     number_of_tickets = models.PositiveIntegerField()
     alert_phone_number = models.CharField(max_length=15)
-    pending_final = models.FloatField(editable=False, default=0)
+    payment_due = models.FloatField(editable=False, default=0)
     qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)
-    is_pending_final_checked = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.qr_code:
@@ -28,7 +28,7 @@ class Booking(models.Model):
             pending = self.number_of_tickets * 5
         else:
             pending = self.number_of_tickets * 7
-        self.pending_final = pending
+        self.payment_due = pending
 
         super().save(*args, **kwargs)
 
